@@ -8,7 +8,7 @@ body {
 }
 .navigation-header {
   max-height: 8rem;
-  background-color: #e6e6e7;
+  border-bottom: 1px solid #f0f8ff;
 }
 
 .logo-text {
@@ -16,8 +16,63 @@ body {
   font-size: 25px;
   line-height: 30px;
   color: #10ef7c;
+  padding-left: 14.8rem;
 }
 
+.form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text-headers {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0;
+}
+.login-header {
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  text-align: center;
+  color: #010414;
+}
+
+.login-reqs {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  text-align: center;
+  color: #808189;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.login-form {
+  max-width: 39.2rem;
+  width: 100%;
+}
+.form-labels {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+  color: #010414;
+}
+.form-inputs {
+  height: 5.6rem;
+  background: #ffffff;
+  border: 1px solid #e6e6e7;
+  border-radius: 8px;
+}
+.login-btn {
+  background: #ef1083;
+  border-radius: 50px;
+  max-width: 39.2rem;
+  width: 100%;
+  height: 5.6rem;
+}
 a {
   color: inherit;
   text-decoration: none;
