@@ -16,12 +16,11 @@ body {
   font-size: 25px;
   line-height: 30px;
   color: #10ef7c;
-  padding-left: 14.8rem;
+  padding-left: 10.8rem;
 }
 
 .form-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -48,12 +47,12 @@ body {
 
 .form-wrapper {
   display: flex;
-  justify-content: center;
-}
-.login-form {
+  flex-direction: column;
   max-width: 39.2rem;
   width: 100%;
+  margin: auto;
 }
+
 .form-labels {
   font-weight: 700;
   font-size: 1.4rem;
@@ -80,4 +79,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.ant-upload-wrapper .ant-upload-drag {
+  max-height: 182px;
+  height: 100%;
+}
+
+.ant-select-selector {
+  height: 46px !important;
 }

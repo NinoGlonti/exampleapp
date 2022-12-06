@@ -1,0 +1,29 @@
+.recruitement-navigation {
+  padding: 4.1rem 0 0 10.8rem;
+}
+
+.navigation-text {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #010414;
+  padding-left: 10px;
+}
+.information-titles {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #bfc0c4;
+}
+
+.radio-group {
+  padding: 17px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.number-input {
+  height: 46px;
+  width: 392px;
+}

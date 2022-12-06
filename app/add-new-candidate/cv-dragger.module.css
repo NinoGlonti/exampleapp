@@ -1,0 +1,14 @@
+.dragger {
+  height: 182px;
+  background: rgba(246, 246, 247, 0.5);
+  border: 1px dashed #e6e6e7;
+  border-radius: 8px;
+}
+.upload-btn {
+  width: 241px;
+  height: 48px;
+  background: #ef1083;
+  border-radius: 24px;
+  border: none;
+  color: #fff;
+}

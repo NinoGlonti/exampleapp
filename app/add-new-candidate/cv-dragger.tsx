@@ -4,11 +4,15 @@ import { useState, SyntheticEvent, useEffect, useMemo } from "react";
 const { Dragger } = Upload;
 import type { UploadProps } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import styles from "./cv-dragger.module.css";
 
 const props: UploadProps = {
   name: "file",
   multiple: true,
   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  accept: "application/pdf",
+  showUploadList: true,
+
   onChange(info) {
     const { status } = info.file;
     if (status !== "uploading") {
@@ -26,17 +30,10 @@ const props: UploadProps = {
 };
 const CvDragger = () => {
   return (
-    <Dragger {...props}>
-      <p className="ant-upload-drag-icon">
-        <InboxOutlined />
-      </p>
-      <p className="ant-upload-text">
-        Click or drag file to this area to upload
-      </p>
-      <p className="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibit from uploading
-        company data or other band files
-      </p>
+    <Dragger {...props} className={styles["dragger"]}>
+      <p className="ant-upload-text">Drag files here to upload</p>
+      <p className="ant-upload-hint">or</p>
+      <Button className={styles["upload-btn"]}>CHOOSE FILE TOO UPLOAD</Button>
     </Dragger>
   );
 };
