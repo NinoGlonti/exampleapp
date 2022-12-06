@@ -10,10 +10,16 @@ import {
   FormInstance,
 } from "antd";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
+  const router = useRouter();
+
+  const submitHandler = () => {
+    router.push("/add-new-candidate");
+  };
 
   return (
     <div className="form-container">
@@ -22,7 +28,12 @@ export default function Page() {
         <Text className="login-reqs">Fill in required fields to sign in </Text>
       </div>
       <div className="form-wrapper">
-        <Form className="login-form" ref={formRef} layout="vertical">
+        <Form
+          className="login-form"
+          ref={formRef}
+          layout="vertical"
+          onFinish={submitHandler}
+        >
           <Form.Item
             label="Username"
             hasFeedback
