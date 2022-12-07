@@ -9,6 +9,8 @@ body {
 .navigation-header {
   max-height: 8rem;
   border-bottom: 1px solid #f0f8ff;
+  display: flex;
+  align-items: center;
 }
 
 .logo-text {
@@ -19,6 +21,28 @@ body {
   padding-left: 10.8rem;
 }
 
+.navigation-links {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 8.9rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #010414;
+}
+.recruitement-link:active,
+.recruitement-link:focus,
+.recruitement-link:hover {
+  font-weight: 700;
+}
+.import-link {
+  padding-left: 3.2rem;
+}
+.import-link:active,
+.import-link:focus,
+.import-link:hover {
+  font-weight: 700;
+}
 .form-container {
   display: flex;
   flex-direction: column;

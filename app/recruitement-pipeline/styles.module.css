@@ -1,0 +1,29 @@
+.recruitement-container {
+  padding: 40px 108px 19px 108px;
+}
+.recruitement-header {
+  display: flex;
+  justify-content: space-between;
+}
+.recruitement-header-text {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 30px;
+  color: #010414;
+}
+
+.new-candidate-btn {
+  width: 184px;
+  line-height: 48px;
+  display: block;
+  background: #ef1083;
+  border-radius: 28px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  text-align: center;
+}
+
+.salary-text {
+  display: inline;
+}
