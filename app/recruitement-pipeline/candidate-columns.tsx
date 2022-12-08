@@ -11,8 +11,7 @@ export const columns: ColumnsType<CandidateResponse["data"][number]> = [
     key: "candidate",
     render: (candidate) => (
       <p>
-        {candidate.name}
-        {candidate.name}
+        {candidate.name} {candidate.last_name}
       </p>
     ),
   },
@@ -72,23 +71,24 @@ export const data: CandidateDataType[] = [
     status: "interview",
     phone: "599993438",
   },
-  /*{
+  {
     key: "2",
-    candidate: "John Red",
-    contact: "johnrd@gmail.com",
-    experience: 8,
-    skills: ["Laravel"],
-    salary: { minSalary: 8000, maxSalary: 10000 },
-    status: "interview",
+    candidate: { name: "Giorgi", last_name: "Lomishvili" },
+    email: "giolom@gmail.com",
+    experience: 2,
+    skills: ["Next.js"],
+    salary: { minSalary: 3000, maxSalary: 4000 },
+    status: "First contact",
+    phone: "599768899",
   },
   {
     key: "3",
-    candidate: "John White",
-    contact: "johnwt@gmail.com",
+    candidate: { name: "Davit", last_name: "Chichinashvili" },
+    email: "davit@gmail.com",
     experience: 4,
-    skills: ["Laravel"],
-    salary: { minSalary: 4500, maxSalary: 5000 },
-    status: "interview",
+    skills: ["Next.js"],
+    salary: { minSalary: 4000, maxSalary: 5000 },
+    status: "Rejected",
+    phone: "599233222",
   },
-  */
 ];

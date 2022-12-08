@@ -1,7 +1,89 @@
+"use client";
+
+import {
+  Form,
+  Button,
+  Typography,
+  Input,
+  FormInstance,
+  Select,
+  Radio,
+  InputNumber,
+  Divider,
+  Col,
+  Row,
+} from "antd";
+import React, { useState, useEffect, useRef } from "react";
+
 const page = () => {
+  const { Text } = Typography;
+
   return (
-    <div>
-      <p>Import</p>
+    <div className="form-container">
+      <div className="text-headers">
+        <Text className="login-header">Import Candidates</Text>
+      </div>
+      <div className="form-wrapper">
+        <Form className="login-form" layout="vertical" id={"itemForm"}>
+          <Row gutter={6}>
+            <Form.Item
+              label="Followers Count"
+              name="followers"
+              className="form-labels"
+            >
+              <Form.Item
+                name="min-followers"
+                style={{ display: "inline-block", width: "185px" }}
+              >
+                <Input className="form-inputs" placeholder="Min Followers" />
+              </Form.Item>
+              <Form.Item
+                name="max-followers"
+                style={{
+                  display: "inline-block",
+                  width: "185px",
+                  marginLeft: "24px",
+                }}
+              >
+                <Input className="form-inputs" placeholder="Max Followers" />
+              </Form.Item>
+            </Form.Item>
+          </Row>
+          <Row gutter={6}>
+            <Form.Item
+              label="Github Count of public repositories"
+              name="public-repos"
+              className="form-labels"
+            >
+              <Form.Item
+                name="min-repos"
+                style={{ display: "inline-block", width: "185px" }}
+              >
+                <Input className="form-inputs" placeholder="Min repositories" />
+              </Form.Item>
+              <Form.Item
+                name="max-reepos"
+                style={{
+                  display: "inline-block",
+                  width: "185px",
+                  marginLeft: "24px",
+                }}
+              >
+                <Input className="form-inputs" placeholder="Max repositories" />
+              </Form.Item>
+            </Form.Item>
+          </Row>
+          <Form.Item label="Stack" className="form-labels" name="skills">
+            <Select optionFilterProp="children" showSearch></Select>
+          </Form.Item>
+          <Form.Item label="Location" className="form-labels" name="location">
+            <Select optionFilterProp="children" showSearch></Select>
+          </Form.Item>
+        </Form>
+        <Button type="primary" size="large" className="login-btn">
+          Import
+        </Button>
+      </div>
     </div>
   );
 };

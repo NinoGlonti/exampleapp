@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
 import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { CandidateResponse, CandidateDataType } from "./candidate-types";
 import { columns, data } from "./candidate-columns";
+import Search from "./search";
 
 const Page = () => {
   const { Text } = Typography;
@@ -22,6 +22,7 @@ const Page = () => {
           Add candidate
         </Link>
       </div>
+      <Search />
       <Divider dashed />
       <Table columns={columns} dataSource={data} />
     </div>

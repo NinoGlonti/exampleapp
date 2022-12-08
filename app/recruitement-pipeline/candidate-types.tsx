@@ -15,7 +15,7 @@ export interface CandidateDataType {
   status: string;
 }
 
-export type PaymentsResponse = {
+export type CandidateResponse = {
   current_page: number;
   data: CandidateDataType[];
   next_page_url: string | number | null;
