@@ -1,13 +1,13 @@
 export default function Head() {
   return (
     <>
-      <title>Redberry Recruitement</title>
+      <title>Import Candidates</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
-        content="Sign up to add new employment candidates for Redberry, see their skills and salaries ."
+        content="Import Candidates from Redberry recruitement database"
       />
-      <meta property="og:title" content="Redberry Recruitement" />
+      <meta property="og:title" content="Import Redberry Candidates" />
       <meta property="og:type" content="website" />
       <link rel="icon" href="/favicon.ico" />
     </>

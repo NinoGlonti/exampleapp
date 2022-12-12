@@ -5,7 +5,6 @@ import "../styles/globals.css";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import path from "path";
 
 const NavBar: React.FC = () => {
   const pathname = usePathname();

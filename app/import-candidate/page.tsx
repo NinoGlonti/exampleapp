@@ -1,18 +1,6 @@
 "use client";
 
-import {
-  Form,
-  Button,
-  Typography,
-  Input,
-  FormInstance,
-  Select,
-  Radio,
-  InputNumber,
-  Divider,
-  Col,
-  Row,
-} from "antd";
+import { Form, Button, Typography, Input, Select, Row } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 
 const page = () => {
