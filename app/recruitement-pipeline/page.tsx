@@ -2,12 +2,23 @@
 import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import { CandidateResponse, CandidateDataType } from "./candidate-types";
 import { columns, data } from "./candidate-columns";
 import Search from "./search";
+import { getSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { Text } = Typography;
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (!session) {
+        router.push("/");
+      }
+    });
+  }, []);
 
   return (
     <div className={styles["recruitement-container"]}>

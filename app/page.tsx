@@ -3,6 +3,8 @@
 import { Form, Button, Typography, Input, FormInstance } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 async function createUser(username: string, password: string) {
   const response = await fetch("/api/auth/signup", {
@@ -21,26 +23,51 @@ async function createUser(username: string, password: string) {
 
   return data;
 }
+
 export default function Page() {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
+  const [isSession, setSession] = useState(false);
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session) {
+        setSession(true);
+      }
+    });
+  }, []);
 
   const submitHandler = async (val: any) => {
-    console.log("raa", val);
     if (isLogin) {
-      //login the user
+      const result = await signIn("credentials", {
+        redirect: false,
+        username: val.username,
+        password: val.password,
+      });
+      getSession().then((session) => {
+        if (session) {
+          router.push("/import-candidate");
+        }
+      });
+      /* if (!isSession) {
+        console.log("noot a loggeed in user");
+        router.push("/");
+      }
+      */
+      //isSession ? router.push("/add-new-candidate") : router.push("/");
     } else {
       try {
         const result = createUser(val.username, val.password);
-        console.log("reesult of creation", result);
+        return result;
       } catch (error) {
         console.log(error);
       }
+      // router.push("/add-new-candidate");
     }
-    //router.push("/add-new-candidate");
   };
+
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
   }

@@ -1,10 +1,21 @@
 "use client";
 
 import { Form, Button, Typography, Input, Select, Row } from "antd";
-import React, { useState, useEffect, useRef } from "react";
+import { getSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const { Text } = Typography;
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (!session) {
+        router.push("/");
+      }
+    });
+  }, []);
 
   return (
     <div className="form-container">
@@ -76,4 +87,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
