@@ -5,6 +5,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { getSession } from "next-auth/react";
+//import validation from "../Middlewares/validationMiddleware";
+//import validationSchema from "../Validations/password-validation";
+import { Formik } from "formik";
 
 async function createUser(username: string, password: string) {
   const response = await fetch("/api/auth/signup", {
@@ -16,20 +19,27 @@ async function createUser(username: string, password: string) {
   });
 
   const data = await response.json();
+  //console.log(data, "data");
 
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  }
+  //if (!response.ok) {
+  // console.log(data.message, "error");
+
+  //throw new Error(data.message || "Something went wrong!");
+  //}
 
   return data;
 }
-
+const initialValues: any = {
+  username: "",
+  password: "",
+};
 export default function Page() {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [isSession, setSession] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getSession().then((session) => {
@@ -38,6 +48,10 @@ export default function Page() {
       }
     });
   }, []);
+
+  const handleSubmit = (values: any) => {
+    alert(JSON.stringify(values));
+  };
 
   const submitHandler = async (val: any) => {
     if (isLogin) {
@@ -51,20 +65,13 @@ export default function Page() {
           router.push("/import-candidate");
         }
       });
-      /* if (!isSession) {
-        console.log("noot a loggeed in user");
-        router.push("/");
-      }
-      */
-      //isSession ? router.push("/add-new-candidate") : router.push("/");
     } else {
       try {
-        const result = createUser(val.username, val.password);
+        const result = await createUser(val.username, val.password);
         return result;
       } catch (error) {
-        console.log(error);
+        console.log("I am error", error);
       }
-      // router.push("/add-new-candidate");
     }
   };
 
@@ -122,12 +129,13 @@ export default function Page() {
           <Button
             type="primary"
             size="large"
-            className="login-btn"
+            className="register-btn"
             onClick={switchAuthModeHandler}
             style={{ marginTop: "5px" }}
           >
             {isLogin ? "Create new account" : "Login with existing account"}
           </Button>
+          <p>{error}</p>
         </Form>
       </div>
     </div>

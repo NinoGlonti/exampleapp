@@ -1,16 +1,18 @@
 import { connectToDatabase } from "../../../lib/db";
 import { hashPassword } from "../../../lib/auth";
-import { Request, Response, NextFunction } from "express";
+import { validation } from "../../../Middlewares/validationMiddleware";
+import { validationSchema } from "../../../Validations/password-validation";
+import { NextApiRequest, NextApiResponse } from "next";
 
-async function handler(req: Request, res: Response) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const data = req.body;
     const { username, password } = data;
 
-    if (!username || !password) {
-      res.status(422).json({ message: "Invalid Input" });
+    /* if (!username || !password) {
+      res.status(422).json({ message: "Password and Username are required" });
       return;
-    }
+    }*/
 
     const client = await connectToDatabase();
 
@@ -23,8 +25,8 @@ async function handler(req: Request, res: Response) {
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: "User Created!" });
+    res.status(201).json({ ...req.body, method: req.method });
   }
 }
 
-export default handler;
+export default validation(validationSchema, handler);

@@ -20,7 +20,6 @@ body {
   color: #10ef7c;
   padding-left: 10.8rem;
 }
-
 .navigation-links {
   display: flex;
   justify-content: space-between;
@@ -96,6 +95,14 @@ body {
   width: 100%;
   height: 5.6rem;
 }
+
+.register-btn {
+  color: #0000ff;
+  max-width: 39.2rem;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: none;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -112,4 +119,8 @@ a {
 
 .ant-select-selector {
   height: 46px !important;
+}
+
+.ant-btn.ant-btn-lg {
+  border-radius: 50px;
 }
