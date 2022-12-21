@@ -9,11 +9,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const data = req.body;
     const { username, password } = data;
 
-    /* if (!username || !password) {
-      res.status(422).json({ message: "Password and Username are required" });
-      return;
-    }*/
-
     const client = await connectToDatabase();
 
     const db = client.db();
