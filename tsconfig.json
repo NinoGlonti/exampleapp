@@ -32,7 +32,9 @@
     ".next/types/**/*.ts",
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/signup.js",
-    "pages/api/auth/signup.js"
+    "pages/api/auth/signup.js",
+    "lib/db.js",
+    "lib/db.js"
   ],
   "exclude": ["node_modules"]
 }

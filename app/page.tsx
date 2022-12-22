@@ -5,41 +5,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { getSession } from "next-auth/react";
-//import validation from "../Middlewares/validationMiddleware";
-//import validationSchema from "../Validations/password-validation";
 import { Formik } from "formik";
+import { createUser } from "../utils/create-user";
+import { response } from "express";
 
-async function createUser(username: string, password: string) {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
-    body: JSON.stringify({ username, password }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-  //console.log(data, "data");
-
-  //if (!response.ok) {
-  // console.log(data.message, "error");
-
-  //throw new Error(data.message || "Something went wrong!");
-  //}
-
-  return data;
-}
-const initialValues: any = {
-  username: "",
-  password: "",
-};
 export default function Page() {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [isSession, setSession] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setError] = useState("");
 
   useEffect(() => {
     getSession().then((session) => {
@@ -54,7 +30,15 @@ export default function Page() {
   };
 
   const submitHandler = async (val: any) => {
-    if (isLogin) {
+    try {
+      const result = await createUser(val.username, val.password);
+      console.log(result, "resuuuuult");
+      return result;
+    } catch (error) {
+      console.log("I am error", error);
+      setError(error as string);
+    }
+    /*  if (isLogin) {
       const result = await signIn("credentials", {
         redirect: false,
         username: val.username,
@@ -66,13 +50,9 @@ export default function Page() {
         }
       });
     } else {
-      try {
-        const result = await createUser(val.username, val.password);
-        return result;
-      } catch (error) {
-        console.log("I am error", error);
-      }
+    
     }
+    */
   };
 
   function switchAuthModeHandler() {
@@ -116,6 +96,7 @@ export default function Page() {
               placeholder="Password"
             />
           </Form.Item>
+          {errors ? <p className="error-message">{errors}</p> : null}
           <Button
             type="primary"
             size="large"
@@ -135,7 +116,6 @@ export default function Page() {
           >
             {isLogin ? "Create new account" : "Login with existing account"}
           </Button>
-          <p>{error}</p>
         </Form>
       </div>
     </div>

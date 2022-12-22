@@ -13,6 +13,5 @@ export const validationSchema = yup.object({
     .min(8)
     .matches(/[0-9]/, validationNumber)
     .matches(new RegExp(/[A-Z]/), upperAndLowerCase)
-
     .matches(new RegExp(/[a-z]/), upperAndLowerCase),
 });

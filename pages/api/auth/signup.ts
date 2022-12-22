@@ -4,7 +4,7 @@ import { validation } from "../../../Middlewares/validationMiddleware";
 import { validationSchema } from "../../../Validations/password-validation";
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const data = req.body;
     const { username, password } = data;
