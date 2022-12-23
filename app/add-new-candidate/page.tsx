@@ -35,6 +35,19 @@ const Page = () => {
     setValue(e.target.value);
   };
 
+  //types should be written
+  const submitHandler = async (values: any) => {
+    const response = await fetch("/api/add-candidate", {
+      method: "POST",
+      body: JSON.stringify({ ...values }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("I am data", data));
+  };
+
   return (
     <>
       <div className={styles["recruitement-navigation"]}>
@@ -66,12 +79,13 @@ const Page = () => {
             ref={formRef}
             layout="vertical"
             id={"itemForm"}
+            onFinish={submitHandler}
           >
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
                   label="First name"
-                  name="first-name"
+                  name="first_name"
                   className="form-labels"
                 >
                   <Input
@@ -84,7 +98,7 @@ const Page = () => {
               <Col span={12}>
                 <Form.Item
                   label="Last Name"
-                  name="last-name"
+                  name="last_name"
                   className="form-labels"
                 >
                   <Input

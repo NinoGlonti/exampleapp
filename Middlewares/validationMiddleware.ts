@@ -1,6 +1,6 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { OptionalObjectSchema, ObjectShape } from "yup/lib/object";
-import { validationSchema } from "../Validations/password-validation";
+import { validationSchema } from "../schemas/password-validation";
 import { handler } from "../pages/api/auth/signup";
 
 export function validation(
@@ -21,4 +21,4 @@ export function validation(
 
 export default validation(validationSchema, handler);
 
-//{abortEarly: false;}
+//{abortEarly: false;} *gives me all existing errors in array

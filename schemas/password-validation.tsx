@@ -1,8 +1,8 @@
 import * as yup from "yup";
 
 const [validationNumber, upperAndLowerCase, passwordLength] = [
-  "At least 1 number",
-  "Upper and lower case letters",
+  "Password must contain at least 1 number",
+  "Password must contain upper and lower case letters",
   "8 or more characters",
 ];
 

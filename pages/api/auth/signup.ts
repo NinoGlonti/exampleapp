@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../../lib/db";
 import { hashPassword } from "../../../lib/auth";
-import { validation } from "../../../Middlewares/validationMiddleware";
-import { validationSchema } from "../../../Validations/password-validation";
+import { validation } from "../../../middlewares/validationMiddleware";
+import { validationSchema } from "../../../schemas/password-validation";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {

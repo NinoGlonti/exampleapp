@@ -1,13 +1,22 @@
 "use client";
 
-import { Form, Button, Typography, Input, Select, Row } from "antd";
+import {
+  Form,
+  Button,
+  Typography,
+  Input,
+  Select,
+  Row,
+  FormInstance,
+} from "antd";
 import { getSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { Text } = Typography;
   const router = useRouter();
+  const formRef = useRef<FormInstance>(null);
 
   useEffect(() => {
     getSession().then((session) => {
@@ -23,7 +32,12 @@ const Page = () => {
         <Text className="login-header">Import Candidates</Text>
       </div>
       <div className="form-wrapper">
-        <Form className="login-form" layout="vertical" id={"itemForm"}>
+        <Form
+          className="login-form"
+          layout="vertical"
+          id={"itemForm"}
+          ref={formRef}
+        >
           <Row gutter={6}>
             <Form.Item
               label="Followers Count"

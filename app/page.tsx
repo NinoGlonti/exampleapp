@@ -30,15 +30,7 @@ export default function Page() {
   };
 
   const submitHandler = async (val: any) => {
-    try {
-      const result = await createUser(val.username, val.password);
-      console.log(result, "resuuuuult");
-      return result;
-    } catch (error) {
-      console.log("I am error", error);
-      setError(error as string);
-    }
-    /*  if (isLogin) {
+    if (isLogin) {
       const result = await signIn("credentials", {
         redirect: false,
         username: val.username,
@@ -50,9 +42,13 @@ export default function Page() {
         }
       });
     } else {
-    
+      try {
+        const result = await createUser(val.username, val.password);
+        return result;
+      } catch (error) {
+        setError(error as string);
+      }
     }
-    */
   };
 
   function switchAuthModeHandler() {
