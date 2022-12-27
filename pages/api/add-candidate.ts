@@ -37,7 +37,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       source: source,
     });
 
-    res.status(200).json({ message: "New Candidate was added", ...req.body });
+    res.status(201).json({ message: "New Candidate was added", ...req.body });
+  } else {
+    const client = await connectToDatabase();
+    const db = client.db();
+    const data = req.body;
+
+    const documents = await db
+      .collection("candidates")
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+
+    res.status(200).json({ documents });
+    console.log(...req.body);
   }
 }
 

@@ -12,6 +12,5 @@ export async function createUser(username: string, password: string) {
   if (!response.ok) {
     throw data.message;
   }
-  console.log(data, "data");
   return data;
 }

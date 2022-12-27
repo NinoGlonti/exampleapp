@@ -1,24 +1,33 @@
 "use client";
-import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
+import { Typography, Divider, Table } from "antd";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { columns, data } from "./candidate-columns";
-import Search from "./search";
-import { getSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
-const Page = () => {
+async function getData() {
+  console.log("get data head");
+  const res = await fetch("/api/add-candidate");
+  console.log("get data middle");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Page() {
   const { Text } = Typography;
-  const router = useRouter();
+  const data = await getData();
 
-  useEffect(() => {
+  /* useEffect(() => {
     getSession().then((session) => {
       if (!session) {
         router.push("/");
       }
     });
   }, []);
+  */
 
   return (
     <div className={styles["recruitement-container"]}>
@@ -33,11 +42,8 @@ const Page = () => {
           Add candidate
         </Link>
       </div>
-      <Search />
       <Divider dashed />
       <Table columns={columns} dataSource={data} />
     </div>
   );
-};
-
-export default Page;
+}
