@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../lib/db";
+import { validation } from "../../middlewares/validationMiddleware";
+import { candidateValidation } from "../../schemas/candidate-validation";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const data = req.body;
     const {
@@ -11,9 +13,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       phone,
       candidate_location,
       position,
-      salary,
+      min_salary,
+      max_salary,
+
       skills,
-      socials,
+      socials: [linkdin, github_followers, github_repos],
+
       cv,
       experience,
       source,
@@ -29,9 +34,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       phone: phone,
       candidate_location: candidate_location,
       position: position,
-      salary: salary,
+      salary: [
+        {
+          min_salary: min_salary,
+          max_salary: max_salary,
+        },
+      ],
       skills: skills,
-      socials: socials,
+      socials: [],
       cv: cv,
       experience: experience,
       source: source,
@@ -50,8 +60,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .toArray();
 
     res.status(200).json({ documents });
-    console.log(...req.body);
   }
 }
 
-export default handler;
+export default validation(candidateValidation, handler);

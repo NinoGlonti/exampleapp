@@ -2,23 +2,27 @@
 import { Typography, Divider, Table } from "antd";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import { columns, data } from "./candidate-columns";
+import { columns } from "./candidate-columns";
+import { use } from "react";
+import { useEffect } from "react";
 
-async function getData() {
+/*async function getData() {
   console.log("get data head");
-  const res = await fetch("/api/add-candidate");
+  const res = await fetch("/api/add-candidate", { cache: "no-store" });
   console.log("get data middle");
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+   if (!res.ok) {
+     throw new Error("Failed to fetch data");
   }
 
   return res.json();
 }
+*/
+//const dataPro = getData();
 
-export default async function Page() {
+export default function Page() {
   const { Text } = Typography;
-  const data = await getData();
+  // const data = use(dataPro);
 
   /* useEffect(() => {
     getSession().then((session) => {
@@ -43,7 +47,7 @@ export default async function Page() {
         </Link>
       </div>
       <Divider dashed />
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} />
     </div>
   );
 }

@@ -11,7 +11,7 @@ export const columns: ColumnsType<CandidateResponse["data"][number]> = [
     key: "candidate",
     render: (candidate) => (
       <p>
-        {candidate.name} {candidate.last_name}
+        {candidate.first_name} {candidate.last_name}
       </p>
     ),
   },
@@ -60,10 +60,11 @@ export const columns: ColumnsType<CandidateResponse["data"][number]> = [
   },
 ];
 
+/*
 export const data: CandidateDataType[] = [
   {
     key: "1",
-    candidate: { name: "John", last_name: "Brown" },
+    candidate: { first_name: "John", last_name: "Brown" },
     email: "johnbr@gmail.com",
     experience: 2,
     skills: ["Laravel"],
@@ -92,3 +93,4 @@ export const data: CandidateDataType[] = [
     phone: "599233222",
   },
 ];
+*/
