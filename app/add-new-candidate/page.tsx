@@ -19,12 +19,14 @@ import CvDragger from "./cv-dragger";
 import Link from "next/link";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
+import { signIn, useSession, signOut, getSession } from "next-auth/react";
 
 const Page = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const [value, setValue] = useState(1);
   const [mounted, setMounted] = useState(false);
+ // const { data: session } = useSession()
 
   useEffect(() => {
     setMounted(true);

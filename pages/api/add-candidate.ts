@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../lib/db";
-import { validation } from "../../middlewares/validationMiddleware";
+import { validation } from "../../Middlewares/validationMiddleware";
 import { candidateValidation } from "../../schemas/candidate-validation";
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
