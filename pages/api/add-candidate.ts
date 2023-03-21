@@ -15,13 +15,11 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       position,
       min_salary,
       max_salary,
-
       skills,
-      socials: [linkdin, github_followers, github_repos],
-
+      linkedin,
+      github,
       cv,
       experience,
-      source,
     } = data;
 
     const client = await connectToDatabase();
@@ -34,17 +32,13 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       phone: phone,
       candidate_location: candidate_location,
       position: position,
-      salary: [
-        {
-          min_salary: min_salary,
-          max_salary: max_salary,
-        },
-      ],
+      min_salary: min_salary,
+      max_salary: max_salary,
       skills: skills,
-      socials: [],
+      linkedin: linkedin,
+      github: github,
       cv: cv,
       experience: experience,
-      source: source,
     });
 
     res.status(201).json({ message: "New Candidate was added", ...req.body });

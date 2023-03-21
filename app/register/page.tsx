@@ -45,6 +45,7 @@ const Register = () => {
           setError(error as string);
         }
       }
+      
   return (
     <div className="form-container">
       <div className="text-headers">

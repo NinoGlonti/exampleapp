@@ -19,8 +19,8 @@ import CvDragger from "./cv-dragger";
 import Link from "next/link";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
-import { getCountries } from "../../utils/get-countries";
 const { Option } = Select;
+import type { SelectProps } from 'antd';
 
 
 const Page = () => {
@@ -29,13 +29,14 @@ const Page = () => {
   const [value, setValue] = useState(1);
   const [mounted, setMounted] = useState(false);
   const [countries, setCountries] = useState([])
-  //const country_list = getCountries();
+  const [skills, setSkills] = useState("");
+
   useEffect(() => {
     setMounted(true);
   }, []);
    
 
-
+//Fetches country data from open api
   useEffect(() => {
     const fetchCountrydata = async() => {
         try {
@@ -53,14 +54,31 @@ const Page = () => {
       fetchCountrydata();
      }, [])
   
-  /*
-          {countries &&
-                        countries.map((city: any) => (
-                          <Option key={city.official} value={city.official}>
-                            {city.official}
-                          </Option>
-                        ))}
-  */
+  //Oprtions for skills
+  const options: SelectProps['options'] = [];
+  options.push(
+    {
+      label: "Node.js",
+      value: "Node.js",
+    },
+    {
+      label: "React.js",
+      value: "React.js",
+    },
+    {
+      label: "Python.js",
+      value: "Python.js",
+    },
+    
+  )
+
+
+  const handleChange = (value: React.SetStateAction<string>) => {
+    console.log(`selected ${value}`);
+    setSkills(value)
+  };
+
+ //Radio experience values
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -143,10 +161,10 @@ const Page = () => {
             </Form.Item>
             <Form.Item
               label="Phone number"
-              name="phone-number"
+              name="phone"
               className="form-labels"
             >
-              <Input
+              <InputNumber
                 className="form-inputs"
                 placeholder="Phone number"
               />
@@ -154,7 +172,7 @@ const Page = () => {
             <Form.Item
               label="Candidate location"
               className="form-labels"
-              name="country_id"
+              name="candidate_location"
             >
               <Select
                 className={styles["candidate-selector"]}
@@ -162,12 +180,11 @@ const Page = () => {
                 showSearch
               > 
                   {countries &&
-                        countries.map((city: any) => (
-                          <Option key={city.name.official} value={city.name.official}>
-                            {city.name.official}
-                          </Option>
-                        ))}
-        
+                    countries.map((city: any) => (
+                      <Option key={city.name.official} value={city.name.official}>
+                        {city.name.official}
+                      </Option>
+                  ))}
               </Select>
             </Form.Item>
             <Text className={styles["information-titles"]}>
@@ -182,27 +199,33 @@ const Page = () => {
             </Form.Item>
               <Form.Item label="Salary" name="salary" className="form-labels">
                 <Form.Item
-                  name="min-salary"
+                  name="min_salary"
                   style={{
                     display: "inline",
                     marginBottom: "10px",
                   }}                >
-                  <Input className="form-inputs" placeholder="Min Salary"    style={{
+                  <InputNumber className="form-inputs" placeholder="Min Salary"    style={{
                     marginBottom: "8px",
                   }}/>
                 </Form.Item>
                 <Form.Item
-                  name="max-salary"
+                  name="max_salary"
                   style={{
                     marginBottom: "8px",
                   }}
                 >
-                  <Input className="form-inputs" placeholder="Max Salary" />
+                  <InputNumber className="form-inputs" placeholder="Max Salary" />
                 </Form.Item>
               </Form.Item>
 
             <Form.Item label="Skills" className="form-labels" name="skills">
-              <Select optionFilterProp="children" showSearch></Select>
+              <Select 
+                mode="multiple"
+                onChange={handleChange}
+                options={options}
+              >
+
+              </Select>
             </Form.Item>
             <Form.Item label="Socials" name="socials" className="form-labels">
               <Form.Item
