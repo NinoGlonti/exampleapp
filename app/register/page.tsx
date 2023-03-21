@@ -107,9 +107,6 @@ const Register = () => {
           >
             Create an account
           </Button>
-          <Link href={"/login"}>
-            Login
-          </Link>
         </Form>
       </div>
     </div>

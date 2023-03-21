@@ -2,7 +2,9 @@
 import { Form, Button, Typography, Input, FormInstance } from "antd";
 import React, {  useRef } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, useSession} from "next-auth/react";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import styles from "./login.module.css"
 
 const Login = () => {
   const { Text } = Typography;
@@ -19,9 +21,8 @@ const Login = () => {
 
       router.push("/add-new-candidate");    
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }  
-    
   }
 
 
@@ -63,7 +64,6 @@ const Login = () => {
           />
         </Form.Item>
         <Button
-          type="primary"
           size="large"
           className="login-btn"
           onClick={() => {
@@ -72,6 +72,13 @@ const Login = () => {
         >
           Log In
         </Button>
+        <div className={styles["sign-up"]}>
+          <Text>Do not have an account yet?</Text>
+          <Link href={"/register"}>
+              Sing Up
+            </Link>
+        </div>
+    
 
       </Form>
     </div>

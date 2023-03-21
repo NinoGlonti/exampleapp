@@ -3,7 +3,6 @@ import { Button, Typography, Alert, Radio, Upload, message } from "antd";
 import { useState, SyntheticEvent, useEffect, useMemo } from "react";
 const { Dragger } = Upload;
 import type { UploadProps } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
 import styles from "./cv-dragger.module.css";
 
 const props: UploadProps = {
@@ -33,7 +32,7 @@ const CvDragger = () => {
     <Dragger {...props} className={styles["dragger"]}>
       <p className="ant-upload-text">Drag files here to upload</p>
       <p className="ant-upload-hint">or</p>
-      <Button className={styles["upload-btn"]}>CHOOSE FILE TOO UPLOAD</Button>
+      <Button className={styles["upload-btn"]}>CHOOSE FILE TO UPLOAD</Button>
     </Dragger>
   );
 };

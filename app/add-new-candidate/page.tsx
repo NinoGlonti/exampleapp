@@ -99,17 +99,6 @@ const Page = () => {
 
   return (
     <>
-      <div className={styles["recruitement-navigation"]}>
-        <Link href={"/recruitement-pipeline"} passHref>
-          <ArrowLeftOutlined
-            className="navigation-icon"
-            style={{ fontSize: "17.6px" }}
-          />
-          <Text className={styles["navigation-text"]}>
-            Recruitment Pipeline
-          </Text>
-        </Link>
-      </div>
       <div className="form-container">
         <div className="text-headers">
           <Text className="login-header">Add New Candidate</Text>

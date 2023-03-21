@@ -13,30 +13,31 @@ const NavBar: React.FC = () => {
   const {data} = useSession();
 
   useEffect(() => {
-    pathname === "/recruitement-pipeline" || pathname === "/import-candidate" ||"add-new-candidate"
+    pathname === "/recruitement-pipeline" || pathname === "/import-candidate" || pathname === "/add-new-candidate"
       ? setShowNavigation(true)
       : setShowNavigation(false);
   }, [pathname]);
 
   return (
     <header className="navigation-header">
-      <p className="logo-text"> Projects</p>{" "}
-      {showNavigation &&  (
+      <p className="logo-text"> Vala Challenge</p>{" "}
+      {showNavigation ?  (
         <div className="navigation-links">
           <Link className="recruitement-link" href="/recruitement-pipeline">
             Recruitement Pipeline
           </Link>
-          <Link className="import-link" href="/import-candidate">
-            Import Candidates
-          </Link>
-          <span style={{ cursor: "pointer" }} onClick={() => signOut()}>
+          <span className="import-link" style={{ cursor: "pointer" }} onClick={() => signOut()}>
                 {" "}
                 Logout
               </span>
-
-
         </div>
-      )}
+      ):
+       <div className="navigation-links">
+        <Link href={"/"}>
+          Sign In
+        </Link>
+      </div>
+}
     </header>
   );
 };

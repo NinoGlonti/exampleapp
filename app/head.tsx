@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>Redberry Recruitement</title>
+      <title>ValaSolutions Challenge</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
