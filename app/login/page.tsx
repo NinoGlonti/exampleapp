@@ -1,18 +1,13 @@
 "use client"
 import { Form, Button, Typography, Input, FormInstance } from "antd";
-import React, { useState, useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, useSession, signOut, getSession } from "next-auth/react";
-
-
-
+import { signIn, useSession} from "next-auth/react";
 
 const Login = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const router = useRouter();
-  const { data: session, status } = useSession()
-
 
   const submitHandler = async (val: any) => {
     try {

@@ -36,28 +36,7 @@ const Register = () => {
   };
 
 
-  const submitHandler = async (val: any) => {
-    /* if (session) {
-        try {
-          const result = await signIn("credentials", {
-            redirect: false,
-            username: val.username,
-            password: val.password,
-            
-          });
-        }
-        catch(error) {
-          console.log(error)
-        }
-      
-    
-         getSession().then((session) => {
-           if (session) {
-            router.push("/add-new-candidate");
-          }
-        });*/
-    
-        
+  const submitHandler = async (val: any) => {    
         try {
           const result = await createUser(val.email, val.username, val.password, );
           console.log(result)
@@ -66,10 +45,6 @@ const Register = () => {
           setError(error as string);
         }
       }
-
-
-
-
   return (
     <div className="form-container">
       <div className="text-headers">

@@ -8,7 +8,7 @@ const [validationNumber, upperAndLowerCase, passwordLength] = [
 
 export const validationSchema = yup.object({
   email: yup.string().email().required(),
-  username: yup.string(),
+  username: yup.string().required(),
   password: yup
     .string()
     .required()

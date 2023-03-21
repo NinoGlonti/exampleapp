@@ -11,7 +11,6 @@ const NavBar: React.FC = () => {
   const pathname = usePathname();
   const [showNavigation, setShowNavigation] = useState(false);
   const {data} = useSession();
-  console.log(data, "session")
 
   useEffect(() => {
     pathname === "/recruitement-pipeline" || pathname === "/import-candidate" ||"add-new-candidate"

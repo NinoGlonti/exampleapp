@@ -19,19 +19,48 @@ import CvDragger from "./cv-dragger";
 import Link from "next/link";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
-import { signIn, useSession, signOut, getSession } from "next-auth/react";
+import { getCountries } from "../../utils/get-countries";
+const { Option } = Select;
+
 
 const Page = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const [value, setValue] = useState(1);
   const [mounted, setMounted] = useState(false);
- // const { data: session } = useSession()
-
+  const [countries, setCountries] = useState([])
+  //const country_list = getCountries();
   useEffect(() => {
     setMounted(true);
   }, []);
+   
 
+
+  useEffect(() => {
+    const fetchCountrydata = async() => {
+        try {
+           fetch("https://restcountries.com/v3.1/all?fields=name")
+             .then(response => {
+               return response.json()
+             })
+             .then(data => {
+                setCountries(data)
+             })      
+        } catch (error){
+           console.log(error)
+        }
+    }
+      fetchCountrydata();
+     }, [])
+  
+  /*
+          {countries &&
+                        countries.map((city: any) => (
+                          <Option key={city.official} value={city.official}>
+                            {city.official}
+                          </Option>
+                        ))}
+  */
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -91,7 +120,6 @@ const Page = () => {
                   className="form-labels"
                 >
                   <Input
-                    name="first-name"
                     className="form-inputs"
                     placeholder="First Name"
                   />
@@ -104,7 +132,6 @@ const Page = () => {
                   className="form-labels"
                 >
                   <Input
-                    name="last-name"
                     className="form-inputs"
                     placeholder="Last Name"
                   />
@@ -120,7 +147,6 @@ const Page = () => {
               className="form-labels"
             >
               <Input
-                name="phone-number"
                 className="form-inputs"
                 placeholder="Phone number"
               />
@@ -134,35 +160,46 @@ const Page = () => {
                 className={styles["candidate-selector"]}
                 optionFilterProp="children"
                 showSearch
-              ></Select>
+              > 
+                  {countries &&
+                        countries.map((city: any) => (
+                          <Option key={city.name.official} value={city.name.official}>
+                            {city.name.official}
+                          </Option>
+                        ))}
+        
+              </Select>
             </Form.Item>
             <Text className={styles["information-titles"]}>
               Recruitment information
             </Text>
             <Divider dashed></Divider>
             <Form.Item label="Position" className="form-labels" name="position">
-              <Select optionFilterProp="children" showSearch></Select>
+              <Input
+              className="form-inputs"
+              placeholder="Position"
+              />
             </Form.Item>
-            <Row gutter={6}>
               <Form.Item label="Salary" name="salary" className="form-labels">
                 <Form.Item
                   name="min-salary"
-                  style={{ display: "inline-block", width: "185px" }}
-                >
-                  <Input className="form-inputs" placeholder="Min Salary" />
+                  style={{
+                    display: "inline",
+                    marginBottom: "10px",
+                  }}                >
+                  <Input className="form-inputs" placeholder="Min Salary"    style={{
+                    marginBottom: "8px",
+                  }}/>
                 </Form.Item>
                 <Form.Item
                   name="max-salary"
                   style={{
-                    display: "inline-block",
-                    width: "185px",
-                    marginLeft: "24px",
+                    marginBottom: "8px",
                   }}
                 >
                   <Input className="form-inputs" placeholder="Max Salary" />
                 </Form.Item>
               </Form.Item>
-            </Row>
 
             <Form.Item label="Skills" className="form-labels" name="skills">
               <Select optionFilterProp="children" showSearch></Select>
@@ -184,32 +221,21 @@ const Page = () => {
                 />
               </Form.Item>
               <Form.Item
-                name="github-followers"
+                name="github"
                 style={{
                   display: "inline",
                 }}
               >
                 <Input
                   className="form-inputs"
-                  placeholder="GitHub followers"
+                  placeholder="GitHub URL"
                   style={{
                     marginBottom: "8px",
                   }}
                 />
               </Form.Item>
-              <Form.Item
-                name="github-repos"
-                style={{
-                  display: "inline",
-                  marginBottom: "8px",
-                }}
-              >
-                <Input
-                  className="form-inputs"
-                  placeholder="GitHub count of public repositories"
-                />
+ 
               </Form.Item>
-            </Form.Item>
             <CvDragger />
             <Radio.Group
               onChange={onChange}
@@ -228,7 +254,7 @@ const Page = () => {
             >
               {mounted && (
                 <InputNumber
-                  placeholder="Candidate source"
+                  placeholder="Years of experience"
                   className={styles["number-input"]}
                   style={{
                     width: "100%",
@@ -238,13 +264,7 @@ const Page = () => {
                 />
               )}
             </Form.Item>
-            <Form.Item
-              label="Candidate source"
-              name="candidate-source"
-              className="form-labels"
-            >
-              <Input className="form-inputs" placeholder="Candidate source" />
-            </Form.Item>
+     
             <Button
               type="primary"
               size="large"
