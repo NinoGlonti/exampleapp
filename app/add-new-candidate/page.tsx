@@ -74,7 +74,6 @@ const Page = () => {
 
 
   const handleChange = (value: React.SetStateAction<string>) => {
-    console.log(`selected ${value}`);
     setSkills(value)
   };
 
@@ -248,7 +247,7 @@ const Page = () => {
               </Form.Item>
  
               </Form.Item>
-            <CvDragger />
+            <CvDragger/>
             <Radio.Group
               onChange={onChange}
               value={value}

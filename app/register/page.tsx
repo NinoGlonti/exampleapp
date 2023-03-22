@@ -12,23 +12,12 @@ const Register = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const router = useRouter();
-
-  const [isLogin, setIsLogin] = useState(true);
-  const [isSession, setSession] = useState(false);
   const [errors, setError] = useState("");
-  const session = useSession();
 
  // ********Next auth provides a getSession() method which can be called a client or server-side to return a session
  // *** it calls /api/auth/session and returns a promise with a session object if session exists
  //const session = use(getSession());
 
-  useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        setSession(true);
-      }
-    });
-  }, []);
   
 
   const handleSubmit = (values: any) => {

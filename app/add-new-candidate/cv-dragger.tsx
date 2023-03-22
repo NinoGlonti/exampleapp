@@ -2,37 +2,65 @@
 import { Button, Typography, Alert, Radio, Upload, message } from "antd";
 import { useState, SyntheticEvent, useEffect, useMemo } from "react";
 const { Dragger } = Upload;
-import type { UploadProps } from "antd";
 import styles from "./cv-dragger.module.css";
+import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 
-const props: UploadProps = {
-  name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  accept: "application/pdf",
-  showUploadList: true,
 
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
 const CvDragger = () => {
+  const form = new FormData();
+  const [file, setFile] = useState<UploadFile<undefined> | null>(null);
+  const [isPdfFile, setIsPdfFile] = useState<boolean>(false);
+
+  const props: UploadProps = {
+    name: "file",
+    multiple: false,
+    maxCount: 1,
+    accept: "application/pdf",
+    showUploadList: true,
+    beforeUpload: (file) => {
+      const isPDF =
+      file.type === "application/pdf";
+
+      if (file.type === "application/pdf") {
+        setIsPdfFile(true);
+      } else {
+        setIsPdfFile(false);
+      }
+    },
+  
+    
+    onChange(info) {
+      const { status } = info.file;
+       if(isPdfFile) {
+        setFile(info.fileList[0])
+       }
+        if (status === "done") {
+          message.success(`${info.file.name} file uploaded successfully.`);
+        } else if (status === "error") {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+       },
+
+  };
+
+  const handleSubmit = async(e: SyntheticEvent) => {
+    let formData = new FormData();
+    formData.append("cv", new Blob([[file?.originFileObj as any]]))
+    try {
+      const response = await fetch("/api/add-candidate",
+        formData
+      )
+    }
+    catch(error) {
+      console.log(error) 
+    }
+  }
+
   return (
-    <Dragger {...props} className={styles["dragger"]}>
+    <Dragger {...props} className={styles["dragger"]} name="cv">
       <p className="ant-upload-text">Drag files here to upload</p>
       <p className="ant-upload-hint">or</p>
-      <Button className={styles["upload-btn"]}>CHOOSE FILE TO UPLOAD</Button>
+      <Button className={styles["upload-btn"]} onClick={handleSubmit}>CHOOSE FILE TO UPLOAD</Button>
     </Dragger>
   );
 };
