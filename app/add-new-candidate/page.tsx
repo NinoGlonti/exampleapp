@@ -36,7 +36,7 @@ const Page = () => {
   }, []);
    
 
-//Fetches country data from open api
+//Fetches country data from external api
   useEffect(() => {
     const fetchCountrydata = async() => {
         try {

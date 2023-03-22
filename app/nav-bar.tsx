@@ -26,14 +26,14 @@ const NavBar: React.FC = () => {
           <Link className="recruitement-link" href="/recruitement-pipeline">
             Recruitement Pipeline
           </Link>
-          <span className="import-link" style={{ cursor: "pointer" }} onClick={() => signOut()}>
+          <span className="logout-btn" style={{ cursor: "pointer" }} onClick={() => signOut()}>
                 {" "}
                 Logout
               </span>
         </div>
-      ):
+      ): 
        <div className="navigation-links">
-        <Link href={"/"}>
+        <Link href={"/"} className="sign-up-nav">
           Sign In
         </Link>
       </div>
