@@ -1,17 +1,13 @@
 export interface CandidateDataType {
   key: string;
-  candidate: {
-    name: string;
-    last_name: string;
-  };
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
   experience: number;
   skills: string[];
-  salary: {
-    minSalary: number;
-    maxSalary: number;
-  };
+  min_salary: number;
+  max_salary: number;
   status: string;
 }
 

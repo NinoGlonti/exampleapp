@@ -3,35 +3,27 @@ import { Typography, Divider, Table } from "antd";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { columns } from "./candidate-columns";
-import { use } from "react";
-import { useEffect } from "react";
+import { response } from "express";
+import { useState, useEffect } from "react";
 
-/*async function getData() {
-  console.log("get data head");
-  const res = await fetch("/api/add-candidate", { cache: "no-store" });
-  console.log("get data middle");
-
-   if (!res.ok) {
-     throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-*/
-//const dataPro = getData();
 
 export default function Page() {
   const { Text } = Typography;
-  // const data = use(dataPro);
+  const [data, setData] = useState()
 
-  /* useEffect(() => {
-    getSession().then((session) => {
-      if (!session) {
-        router.push("/");
-      }
-    });
-  }, []);
-  */
+useEffect(() => {
+  async function getData() {
+    const res = await fetch("/api/add-candidate")
+    .then((response) => {
+      return response.json()
+    })
+    .then((documents) => {
+      setData(documents.documents)
+    })
+  }
+    getData();
+ }, [])
+
 
   return (
     <div className={styles["recruitement-container"]}>
@@ -47,7 +39,10 @@ export default function Page() {
         </Link>
       </div>
       <Divider dashed />
-      <Table columns={columns} />
+      <Table
+       columns={columns}          
+       dataSource={data}
+      />
     </div>
   );
 }
