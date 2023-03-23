@@ -2,10 +2,19 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../lib/db";
 import { validation } from "../../Middlewares/validationMiddleware";
 import { candidateValidation } from "../../schemas/candidate-validation";
+import { IncomingForm } from 'formidable'
+import { promises as fs } from 'fs'
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const data = req.body;
+   // const form = new IncomingForm()
+    
+//    const contents = await fs.readFile(data?.files?.myFile.filepath)
+   // const FILE = {
+   //     "fileName": data?.files?.cv.originalFilename,
+   //     "content": contents
+ //   }
     const {
       first_name,
       last_name,

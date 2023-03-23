@@ -74,7 +74,7 @@ const Login = () => {
         </Button>
         <div className={styles["sign-up"]}>
           <Text>Do not have an account yet?</Text>
-          <Link href={"/register"}>
+          <Link href={"/register"} className="signup-btn">
               Sing Up
             </Link>
         </div>

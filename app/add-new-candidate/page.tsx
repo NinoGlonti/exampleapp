@@ -1,23 +1,9 @@
 "use client";
 
-import {
-  Form,
-  Button,
-  Typography,
-  Input,
-  FormInstance,
-  Select,
-  Radio,
-  InputNumber,
-  Divider,
-  Col,
-  Row,
-} from "antd";
+import {Form, Button, Typography, Input, FormInstance, Select, Radio, InputNumber, Divider, Col, Row } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import type { RadioChangeEvent } from "antd";
 import CvDragger from "./cv-dragger";
-import Link from "next/link";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
 const { Option } = Select;
 import type { SelectProps } from 'antd';
@@ -27,14 +13,9 @@ const Page = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
   const [value, setValue] = useState(1);
-  const [mounted, setMounted] = useState(false);
   const [countries, setCountries] = useState([])
   const [skills, setSkills] = useState("");
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-   
 
 //Fetches country data from external api
   useEffect(() => {
@@ -215,7 +196,7 @@ const Page = () => {
 
               </Select>
             </Form.Item>
-            <Form.Item label="Socials" name="socials" className="form-labels">
+            <Form.Item label="Socials"  className="form-labels">
               <Form.Item
                 name="linkedin"
                 style={{
@@ -247,7 +228,7 @@ const Page = () => {
               </Form.Item>
  
               </Form.Item>
-            <CvDragger/>
+           {/**<CvDragger/> */} 
             <Radio.Group
               onChange={onChange}
               value={value}
@@ -263,7 +244,6 @@ const Page = () => {
               name="experience"
               className="form-labels"
             >
-              {mounted && (
                 <InputNumber
                   placeholder="Years of experience"
                   className={styles["number-input"]}
@@ -273,7 +253,7 @@ const Page = () => {
                     borderBottom: "1px solid #e6e6e7",
                   }}
                 />
-              )}
+              
             </Form.Item>
      
             <Button

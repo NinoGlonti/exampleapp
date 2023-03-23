@@ -31,7 +31,13 @@ const NavBar: React.FC = () => {
                 Logout
               </span>
         </div>
-      ): 
+      ): pathname==="/" ?(
+        <div className="navigation-links">
+        <Link href={"/register"} className="signup-btn">
+          Sign Up
+        </Link>
+      </div>
+      ) : 
        <div className="navigation-links">
         <Link href={"/"} className="sign-up-nav">
           Sign In

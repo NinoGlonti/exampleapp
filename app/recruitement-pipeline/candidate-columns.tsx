@@ -3,6 +3,7 @@ import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
 
 import styles from "./styles.module.css";
 import type { ColumnsType } from "antd/es/table";
+import Email from "next-auth/providers/email";
 
 
 export const columns: ColumnsType<CandidateResponse["data"][number]> = [
@@ -11,19 +12,20 @@ export const columns: ColumnsType<CandidateResponse["data"][number]> = [
     dataIndex: "first_name",
     key: "first_name",
     render: (_,{first_name, last_name}) => (
-       <p>{first_name} {last_name}</p>
+       <p key={first_name}>{first_name} {last_name}</p>
     ),
   },
   {
     title: "Contact",
     dataIndex: "email",
     key: "email",
+    render: (email) => <p key={email}>{email}</p>
   },
   {
     title: "Experience",
     dataIndex: "experience",
     key: "experience",
-    render: (text) => <p>{text} Years </p>,
+    render: (text) => <p  key={text}>{text} Years </p>,
   },
   {
     title: "Skills",
@@ -46,13 +48,14 @@ export const columns: ColumnsType<CandidateResponse["data"][number]> = [
     dataIndex: "salary",
     key: "salary",
     render: (_, { min_salary, max_salary }) => (
-      <p>{min_salary}-{max_salary}$</p>
+      <p key={min_salary}>{min_salary}-{max_salary}$</p>
     ),
   },
   {
     title: "Status",
     key: "status",
     dataIndex: "status",
+    render: (status) => <p key={status}>{status}</p>
   },
 ];
 

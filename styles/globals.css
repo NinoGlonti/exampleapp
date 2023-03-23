@@ -7,18 +7,32 @@ body {
   font-size: 10px;
 }
 
-
 * {
   box-sizing: border-box;
 }
 
 a{
   color: #10ef7c;
+  text-decoration: none;
 }
 
 .logout-btn {
   color: #10ef7c;
 }
+.logout-btn:active,
+.logout-btn:hover,
+.logout-btn:focus {
+  font-weight: 700;
+}
+
+.signup-btn:active,
+.signup-btn:focus,
+.signup-btn:hover {
+  font-weight: 700;
+  color: #10ef7c;
+
+}
+
 .navigation-header {
   max-height: 8rem;
   border-bottom: 1px solid #f0f8ff;
@@ -42,7 +56,9 @@ a{
   color: #010414;
   align-items: center;
 }
-
+.recruitement-link {
+  padding-right:3rem;
+}
 .recruitement-link:active,
 .recruitement-link:focus,
 .recruitement-link:hover {
@@ -113,12 +129,17 @@ a{
   height: 5.6rem;
   border:none;
   color: #ffffff;
+  font-weight: 700;
+
 }
 
-.login-btn::active,
-.login-btn::hover,
+.login-btn:active,
+.login-btn:hover,
 .login-btn:focus {  
   background: #ef1083;
+  color: #fff !important;
+  font-weight: 700;
+
 }
 
 .register-btn {
@@ -126,6 +147,16 @@ a{
   max-width: 39.2rem;
   width: 100%;
   box-shadow: none;
+  background: #ef1083;
+  font-weight: 700;
+
+}
+
+
+.register-btn:active,
+.register-btn:hover,
+.register-btn:focus {  
+  background: #ef1083 !important;
 }
 
 .error-message {
