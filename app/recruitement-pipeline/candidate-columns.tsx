@@ -3,7 +3,6 @@ import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
 
 import styles from "./styles.module.css";
 import type { ColumnsType } from "antd/es/table";
-import Email from "next-auth/providers/email";
 
 
 export const columns: ColumnsType<CandidateResponse["data"][number]> = [
