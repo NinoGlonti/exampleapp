@@ -1,10 +1,10 @@
 "use client";
-import { columns, data } from "./candidate-columns";
+import { columns } from "./candidate-columns";
 import { useState } from "react";
 import { Input, Space } from "antd";
 
 const Search = () => {
-  const { Search } = Input;
+ /* const { Search } = Input;
 
   const [dataSource, setDataSource] = useState(data);
   const [value, setValue] = useState("");
@@ -26,7 +26,10 @@ const Search = () => {
       onSearch={(e) => {}}
       style={{ width: 200 }}
     />
-  );
+  );*/
+  return(
+    <div>Search bar</div>
+  )
 };
 
 export default Search;

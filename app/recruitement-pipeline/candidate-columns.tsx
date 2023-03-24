@@ -1,5 +1,5 @@
-import { CandidateResponse, CandidateDataType } from "./candidate-types";
-import { Typography, Divider, Col, Row, Space, Table, Button } from "antd";
+import { CandidateResponse} from "./candidate-types";
+import {  Button } from "antd";
 
 import styles from "./styles.module.css";
 import type { ColumnsType } from "antd/es/table";
