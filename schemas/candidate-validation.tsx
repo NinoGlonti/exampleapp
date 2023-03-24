@@ -10,16 +10,16 @@ const urlRegExp =
 const [urlError] = ["URL is not valid"]
 
 export const candidateValidation = yup.object({
-  first_name: yup.string().required().max(8),
-  last_name: yup.string().required().max(8),
+  first_name: yup.string().required(),
+  last_name: yup.string().required(),
   email: yup.string().email().required(),
   phone: yup.string().matches(phoneRegExp, phoneNumber).required(),
   candidate_location: yup.string().required(),
   position: yup.string().required(),
-  min_salary: yup.number().required(),
-  max_salary: yup.number().required(),
+  min_salary: yup.number(),
+  max_salary: yup.number(),
   skills: yup.array().required(),
-  linkedin: yup.string().matches(urlRegExp, urlError).required(),
-  github: yup.string().matches(urlRegExp, urlError).required(),
-  experience: yup.number().required(),
+  linkedin: yup.string().matches(urlRegExp, urlError),
+  github: yup.string().matches(urlRegExp, urlError),
+  experience: yup.number(),
 });

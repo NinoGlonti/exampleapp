@@ -44,6 +44,12 @@ const Login = () => {
           hasFeedback
           name="username"
           className="form-labels"
+          rules={[
+            {
+              required: true,
+              message: "Username is a required field"
+            }
+          ]}
         >
           <Input
             name="username"
@@ -56,6 +62,12 @@ const Login = () => {
           hasFeedback
           name="password"
           className="form-labels"
+          rules={[
+            {
+              required: true,
+              message: "Username is a required field"
+            }
+          ]}
         >
           <Input
             name="passwoord"

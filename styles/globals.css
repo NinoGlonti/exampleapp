@@ -54,7 +54,6 @@ a{
   font-size: 16px;
   line-height: 19px;
   color: #010414;
-  align-items: center;
 }
 .recruitement-link {
   padding-right:3rem;
@@ -184,3 +183,8 @@ a{
   color: #f5222d;
 }
 
+@media only screen and (max-width: 768px) {
+  .recruitement-link {
+    padding-right:0;
+  }
+}

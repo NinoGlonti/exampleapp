@@ -28,6 +28,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       linkedin,
       github,
       cv,
+      status,
       experience,
     } = data;
 
@@ -47,6 +48,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       linkedin: linkedin,
       github: github,
       cv: cv,
+      status:status,
       experience: experience,
     });
 

@@ -3,18 +3,21 @@
 import {Form, Button, Typography, Input, FormInstance, Select, Radio, InputNumber, Divider, Col, Row } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import type { RadioChangeEvent } from "antd";
-import CvDragger from "./cv-dragger";
 import styles from "./styles.module.css";
 const { Option } = Select;
-import type { SelectProps } from 'antd';
-
+import {options} from "./options-data"
+import FormItem from "antd/es/form/FormItem";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { Text } = Typography;
   const formRef = useRef<FormInstance>(null);
-  const [value, setValue] = useState(1);
+  const [radioValue, setRadioValue] = useState("Junior");
   const [countries, setCountries] = useState([])
   const [skills, setSkills] = useState("");
+  const [errors, setError] = useState("")
+
+  const router = useRouter();
 
 
 //Fetches country data from external api
@@ -35,23 +38,6 @@ const Page = () => {
       fetchCountrydata();
      }, [])
   
-  //Oprtions for skills
-  const options: SelectProps['options'] = [];
-  options.push(
-    {
-      label: "Node.js",
-      value: "Node.js",
-    },
-    {
-      label: "React.js",
-      value: "React.js",
-    },
-    {
-      label: "Python.js",
-      value: "Python.js",
-    },
-    
-  )
 
 
   const handleChange = (value: React.SetStateAction<string>) => {
@@ -59,9 +45,8 @@ const Page = () => {
   };
 
  //Radio experience values
-  const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+  const onRadioChange = (e: RadioChangeEvent) => {
+    setRadioValue(e.target.value);
   };
 
   //types should be written
@@ -73,8 +58,11 @@ const Page = () => {
         "Content-Type": "application/json",
       },
     })
+      
       .then((res) => res.json())
-      .then((data) => console.log("I am data", data));
+      .then((data) =>  {
+          {data.errors ? setError(data.errors) : router.push("/recruitement-pipeline")}
+      })   
   };
 
   return (
@@ -105,6 +93,12 @@ const Page = () => {
                   label="First name"
                   name="first_name"
                   className="form-labels"
+                  rules={[
+                    {
+                      required: true,
+                      message: "First name is a required field"
+                    }
+                  ]}
                 >
                   <Input
                     className="form-inputs"
@@ -117,6 +111,12 @@ const Page = () => {
                   label="Last Name"
                   name="last_name"
                   className="form-labels"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Last name is a required field"
+                    }
+                  ]}
                 >
                   <Input
                     className="form-inputs"
@@ -125,13 +125,28 @@ const Page = () => {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item label="Email" name="email" className="form-labels">
+            <Form.Item 
+              label="Email" 
+              name="email" 
+              className="form-labels"    
+              rules={[
+              {
+                required: true,
+                message: "Email is a required field"
+              }
+          ]}>
               <Input name="email" className="form-inputs" placeholder="Email" />
             </Form.Item>
             <Form.Item
               label="Phone number"
               name="phone"
               className="form-labels"
+              rules={[
+                {
+                  required: true,
+                  message: "Phone is a required field"
+                }
+              ]}
             >
               <InputNumber
                 className="form-inputs"
@@ -142,6 +157,12 @@ const Page = () => {
               label="Candidate location"
               className="form-labels"
               name="candidate_location"
+              rules={[
+                {
+                  required: true,
+                  message: "Location is a required field"
+                }
+              ]}
             >
               <Select
                 className={styles["candidate-selector"]}
@@ -160,10 +181,21 @@ const Page = () => {
               Recruitment information
             </Text>
             <Divider dashed></Divider>
-            <Form.Item label="Position" className="form-labels" name="position">
+            <Form.Item 
+              label="Position" 
+              className="form-labels" 
+              name="position"
+              rules={[
+                {
+                  required: true,
+                  message: "Position is a required field"
+                }
+              ]}
+              >
               <Input
               className="form-inputs"
               placeholder="Position"
+              
               />
             </Form.Item>
               <Form.Item label="Salary" name="salary" className="form-labels">
@@ -187,16 +219,30 @@ const Page = () => {
                 </Form.Item>
               </Form.Item>
 
-            <Form.Item label="Skills" className="form-labels" name="skills">
+            <Form.Item 
+              label="Skills"
+              className="form-labels" 
+              name="skills"
+              rules={[
+                {
+                  required: true,
+                  message: "Skills is a required field"
+                }
+              ]}
+              >
               <Select 
                 mode="multiple"
                 onChange={handleChange}
                 options={options}
+                showSearch
               >
 
               </Select>
             </Form.Item>
-            <Form.Item label="Socials"  className="form-labels">
+            <Form.Item 
+              label="Socials"  
+              className="form-labels"
+              >
               <Form.Item
                 name="linkedin"
                 style={{
@@ -229,20 +275,28 @@ const Page = () => {
  
               </Form.Item>
            {/**<CvDragger/> */} 
-            <Radio.Group
-              onChange={onChange}
-              value={value}
-              className={styles["radio-group"]}
-            >
-              <Radio value={1}>Junior </Radio>
-              <Radio value={2}>Middle</Radio>
-              <Radio value={3}>Senior</Radio>
-              <Radio value={4}>Lead</Radio>
-            </Radio.Group>
+           <FormItem name="status" >
+              <Radio.Group
+                onChange={onRadioChange}
+                value={radioValue}
+                className={styles["radio-group"]}
+              >
+                <Radio value={"Junior"}>Junior </Radio>
+                <Radio value={"Middle"}>Middle</Radio>
+                <Radio value={"Senior"}>Senior</Radio>
+                <Radio value={"Lead"}>Lead</Radio>
+              </Radio.Group>
+            </FormItem>
             <Form.Item
               label="Years of experience"
               name="experience"
               className="form-labels"
+              rules={[
+                {
+                  required: true,
+                  message: "Experience is a required field"
+                }
+              ]}
             >
                 <InputNumber
                   placeholder="Years of experience"
@@ -255,7 +309,8 @@ const Page = () => {
                 />
               
             </Form.Item>
-     
+            {errors &&(<p className="errors">{errors}</p>)}
+
             <Button
               type="primary"
               size="large"

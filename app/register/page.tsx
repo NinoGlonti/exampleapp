@@ -28,7 +28,6 @@ const Register = () => {
 
   const handleSubmit = (values: FormValues) => {
     alert(JSON.stringify(values));
-    console.log("valueeeees", values)
   };
 
 
